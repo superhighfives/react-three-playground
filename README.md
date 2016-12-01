@@ -32,7 +32,7 @@ npm run start
 To view different playgrounds, edit the `Playground` import in `App.js`. For example, to view Playground 01:
 
 ```
-# App.js
+// App.js
 import Playground from './playgrounds/01'
 ```
 
@@ -52,7 +52,7 @@ Though each playground showcases a different feature, shaders can be interchange
 ### Geometry
 
 ```
-# App.js
+// App.js
 import Playground from './playgrounds/01'
 ```
 
@@ -67,7 +67,7 @@ A wireframe box, floating in space.
 ### Light And Shadow
 
 ```
-# App.js
+// App.js
 import Playground from './playgrounds/02'
 ```
 
@@ -82,7 +82,7 @@ A cube that accepts light and casts shadows.
 ### Video And Texture
 
 ```
-# App.js
+// App.js
 import Playground from './playgrounds/03'
 import { vertexShader, fragmentShader, uniforms } from '../shaders/gradient' // Update for different shaders
 ```
@@ -100,7 +100,7 @@ A shaded texture on a box geometry, floating in space, with a cube that accepts 
 ### Single Shader
 
 ```
-# App.js
+// App.js
 import Playground from './playgrounds/04'
 import { vertexShader, fragmentShader, uniforms } from '../shaders/gradient' // Update for different shaders
 ```
@@ -117,7 +117,7 @@ A flat display, with a single shader on a video texture.
 ### Multi-Pass Shader
 
 ```
-# App.js
+// App.js
 import Playground from './playgrounds/05'
 import * as BaseShader from '../shaders/dots' // First shader
 import * as SecondaryShader from '../shaders/greyscale' // Second shader
