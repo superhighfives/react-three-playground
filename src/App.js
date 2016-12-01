@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Stats from 'stats.js'
-import Playground from './playgrounds/04'
+import Playground from './playgrounds/05'
 import queryString from 'query-string'
 import './index.css'
 
@@ -12,7 +12,11 @@ class App extends Component {
     super()
     // Bind `this` to the animate and webcam functions
     this.animate = this.animate.bind(this)
-    this.state = {overlay: false, webcam: queryString.parse(window.location.search).webcam === 'true'}
+    this.state = {
+      overlay: queryString.parse(window.location.search).overlay === 'true',
+      video: queryString.parse(window.location.search).video || '/videos/wine.mp4',
+      webcam: queryString.parse(window.location.search).webcam === 'true'
+    }
   }
   componentDidMount () {
     this.getVideo()
@@ -20,6 +24,7 @@ class App extends Component {
         this.refs.video.onloadedmetadata = (e) => {
           this.refs.video.play()
         }
+        this.refs.video.crossOrigin = '';
         this.refs.video.src = videoSrc
         // Create a playground by passing it the reference to the canvas
         // along with a looping video (which we'll use from 03 onwards)
@@ -38,7 +43,7 @@ class App extends Component {
           resolve(window.URL.createObjectURL(localMediaStream))
         }, e => reject(e))
       } else {
-        resolve('/videos/wine.mp4')
+        resolve(this.state.video)
       }
     })
   }
@@ -54,7 +59,7 @@ class App extends Component {
   render () {
     return (
       <div className='App'>
-        <video ref='video' style={{display: 'block'}} controls loop />
+        <video ref='video' style={{display: 'none'}} controls loop />
         <canvas ref='canvas' />
         {this.state.overlay &&
           <div className='overlay'>
