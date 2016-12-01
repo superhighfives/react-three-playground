@@ -4,7 +4,7 @@ import { WebGLRenderer, OrthographicCamera, Scene,
          ShaderMaterial, Texture, LinearFilter,
          Vector2 } from 'three'
 import * as BaseShader from '../shaders/dots'
-import * as SecondaryShader from '../shaders/tv'
+import * as SecondaryShader from '../shaders/greyscale'
 import extend from 'extend'
 
 class Playground {

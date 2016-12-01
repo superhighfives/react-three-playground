@@ -39,7 +39,6 @@ const fragmentShader = `
   void main() {
     vec4 texel = texture2D(texture, vUv);
     vec3 color = texel.rgb;
-    color = vec3((color.r + color.g + color.b) / 3.0);
     color = vec3(color * 10.0 - 5.0 + pattern());
     color = texel.rgb + (color - texel.rgb) * intensity;
     gl_FragColor = vec4(color, texel.a);
