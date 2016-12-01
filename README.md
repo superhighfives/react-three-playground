@@ -23,6 +23,8 @@ Though each playground showcases a different feature, shaders can be interchange
 - [Playground 04](#playground-04) - Single Shader
 - [Playground 05](#playground-05) - Multi-Pass Shader
 
+- [Shaders](#shaders)
+
 ---
 
 ## Playground 01
@@ -86,6 +88,22 @@ A flat display, with a two shaders on a video texture.
 
 - Accepts two shaders via a framebuffer
 - Orthonographic Camera
+
+---
+
+## Shaders
+
+Playground 03 - 05 accept a shader. The following shaders are currently available:
+
+- `shaders/base.js` Base (single colour)
+- `shaders/dots.js` Dots
+- `shaders/flip.js` Flip (horizontally)
+- `shaders/glitch.js` Glitch
+- `shaders/gradient.js` Gradient
+- `shaders/greyscale.js` Greyscale
+- `shaders/mirror.js` Mirror (mirror's texture horizontally)
+- `shaders/texture.js` Texture (displays texture)
+- `shaders/tv.js` TV (Old rolling TV)
 
 ---
 
