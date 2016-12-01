@@ -4,6 +4,7 @@
   "private": true,
   "devDependencies": {
     "extend": "^3.0.0",
+    "query-string": "^4.2.3",
     "react-scripts": "0.7.0",
     "stats.js": "^0.17.0",
     "three": "^0.82.1",
