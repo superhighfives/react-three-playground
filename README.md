@@ -24,7 +24,7 @@ Though each playground showcases a different feature, shaders can be interchange
 ### Playground 01
 ## Geometry
 
-TODO: Add image
+![An example of playground 01](./docs/assets/01.png)
 
 `import Playground from './playgrounds/01'`
 
@@ -37,7 +37,7 @@ A wireframe box, floating in space.
 ### Playground 02
 ## Light And Shadow
 
-TODO: Add image
+![An example of playground 02](./docs/assets/02.png)
 
 `import Playground from './playgrounds/02'`
 
@@ -50,7 +50,7 @@ A cube that accepts light and casts shadows.
 ### Playground 03
 ## Video And Texture
 
-TODO: Add image
+![An example of playground 03](./docs/assets/03.png)
 
 `import Playground from './playgrounds/03'`
 
@@ -65,7 +65,7 @@ A shaded texture on a box geometry, floating in space, with a cube that accepts 
 ### Playground 04
 ## Single Shader
 
-TODO: Add image
+![An example of playground 04](./docs/assets/04.png)
 
 `import Playground from './playgrounds/04'`
 
@@ -79,7 +79,7 @@ A flat display, with a single shader on a video texture.
 ### Playground 05
 ## Multi-Pass Shader
 
-TODO: Add image
+![An example of playground 05](./docs/assets/05.png)
 
 `import Playground from './playgrounds/05'`
 
