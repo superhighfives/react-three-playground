@@ -11,9 +11,30 @@ It is set up to accept a single video, either by passing a video URL via the `vi
 
 You can also see how React could be used in tandem with the Three.js canvas element, which can be activated with the `overlay` query string. [http://localhost:3000/?overlay=true](http://localhost:3000/?overlay=true).
 
+## Getting started
+
+To get started, clone the repo locally:
+
+```
+git clone git@github.com:superhighfives/react-three-playground.git
+cd react-three-playground
+npm install
+```
+
+Then, fire it up:
+
+```
+npm run start
+```
+
+## Playgrounds
+
 To view different playgrounds, edit the `Playground` import in `App.js`. For example, to view Playground 01:
 
-`import Playground from './playgrounds/01'`
+```
+# App.js
+import Playground from './playgrounds/01'
+```
 
 Though each playground showcases a different feature, shaders can be interchanged simply by changing the Shader variable that is imported. There is no need to change the settings / uniforms passed to the shaders. Unless you want to. In which case, go for it, you!
 
@@ -30,7 +51,10 @@ Though each playground showcases a different feature, shaders can be interchange
 ![An example of playground 01](./docs/assets/01.png)
 ### Geometry
 
-`import Playground from './playgrounds/01'`
+```
+# App.js
+import Playground from './playgrounds/01'
+```
 
 - Navigable by mouse
 
@@ -42,7 +66,10 @@ A wireframe box, floating in space.
 ![An example of playground 02](./docs/assets/02.png)
 ### Light And Shadow
 
-`import Playground from './playgrounds/02'`
+```
+# App.js
+import Playground from './playgrounds/02'
+```
 
 - Navigable by mouse
 
@@ -54,7 +81,11 @@ A cube that accepts light and casts shadows.
 ![An example of playground 03](./docs/assets/03.png)
 ### Video And Texture
 
-`import Playground from './playgrounds/03'`
+```
+# App.js
+import Playground from './playgrounds/03'
+import { vertexShader, fragmentShader, uniforms } from '../shaders/gradient' // Update for different shaders
+```
 
 - Navigable by mouse
 - Accepts one shader
@@ -68,7 +99,11 @@ A shaded texture on a box geometry, floating in space, with a cube that accepts 
 ![An example of playground 04](./docs/assets/04.png)
 ### Single Shader
 
-`import Playground from './playgrounds/04'`
+```
+# App.js
+import Playground from './playgrounds/04'
+import { vertexShader, fragmentShader, uniforms } from '../shaders/gradient' // Update for different shaders
+```
 
 A flat display, with a single shader on a video texture.
 
@@ -81,7 +116,12 @@ A flat display, with a single shader on a video texture.
 ![An example of playground 05](./docs/assets/05.png)
 ### Multi-Pass Shader
 
-`import Playground from './playgrounds/05'`
+```
+# App.js
+import Playground from './playgrounds/05'
+import * as BaseShader from '../shaders/dots' // First shader
+import * as SecondaryShader from '../shaders/greyscale' // Second shader
+```
 
 A flat display, with a two shaders on a video texture.
 
