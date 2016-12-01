@@ -7,7 +7,7 @@
 
 R3, or React and Three.js, is a series of playgrounds and demos highlighting many of the features and capabilities of WebGL. It covers simple objects, textures and lighting, all the way to custom shaders, framebuffers and video. It benefits from hot reloading, Webpack, and ES6 support out of the box.
 
-It is set up to accept a single video, either by passing a video URL via the `video` query string (for example, [http://localhost:3002/?video=https://media.giphy.com/media/3o6Zti8Yz88sqW1nq0/giphy.mp4](http://localhost:3000/?video=https://media.giphy.com/media/3o6Zti8Yz88sqW1nq0/giphy.mp4)) or by using the `webcam` query string (with http://localhost:3000/?webcam=true). If neither are present, the app will fall back to using a video file, in `video/video.mp4`.
+It is set up to accept a single video, either by passing a video URL via the `video` query string (for example, [http://localhost:3000/?video=https://media.giphy.com/media/3o6Zti8Yz88sqW1nq0/giphy.mp4](http://localhost:3000/?video=https://media.giphy.com/media/3o6Zti8Yz88sqW1nq0/giphy.mp4)) or by using the `webcam` query string (with http://localhost:3000/?webcam=true). If neither are present, the app will fall back to using a video file, in `video/video.mp4`.
 
 You can also see how React could be used in tandem with the Three.js canvas element, which can be activated with the `overlay` query string. [http://localhost:3000/?overlay=true](http://localhost:3000/?overlay=true).
 
