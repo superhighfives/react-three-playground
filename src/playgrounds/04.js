@@ -2,7 +2,7 @@ import { WebGLRenderer, OrthographicCamera, Scene,
          PlaneGeometry, Mesh,
          ShaderMaterial, Texture, LinearFilter,
          Vector2 } from 'three'
-import { vertexShader, fragmentShader, uniforms } from '../shaders/dots'
+import { vertexShader, fragmentShader, uniforms } from '../shaders/glitch'
 import extend from 'extend'
 
 class Playground {

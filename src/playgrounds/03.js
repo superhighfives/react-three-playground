@@ -87,7 +87,7 @@ class Playground {
     this.camera.updateProjectionMatrix()
     this.renderer.setSize(window.innerWidth, window.innerHeight)
   }
-  calculateAspectRatio() {
+  calculateAspectRatio () {
     const textureAspect = this.video.videoWidth / this.video.videoHeight
     const planeAspect = this.planeWidth / this.planeHeight
     this.uniforms.textureFactor.value = new Vector2(1, 1)

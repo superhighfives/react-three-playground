@@ -14,7 +14,7 @@ class App extends Component {
     this.animate = this.animate.bind(this)
     this.state = {
       overlay: queryString.parse(window.location.search).overlay === 'true',
-      video: queryString.parse(window.location.search).video || '/videos/wine.mp4',
+      video: queryString.parse(window.location.search).video || '/videos/video.mp4',
       webcam: queryString.parse(window.location.search).webcam === 'true'
     }
   }
