@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Stats from 'stats.js'
-import Playground from './playgrounds/05'
+import Playground from './playgrounds/04'
 import './index.css'
 
 const stats = new Stats()

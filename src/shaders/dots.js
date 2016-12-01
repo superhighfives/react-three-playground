@@ -2,8 +2,7 @@
 import { Vector2, Vector4 } from 'three'
 
 const uniforms = {
-  angle: {type: 'f', value: 1.57},
-  scale: {type: 'f', value: 1.0},
+  scale: {type: 'f', value: 1000.0},
   intensity: {type: 'f', value: 1.0 },
   offsetRepeat: {type: 'v4', value: new Vector4(0.5, 0.5, 1.0, 1.0) },
   textureFactor: {type: 'v2', value: new Vector2(1, 1)}
@@ -24,15 +23,15 @@ const vertexShader = `
 
 const fragmentShader = `
   uniform sampler2D texture;
-  uniform float angle;
+  uniform float time;
   uniform float scale;
   uniform float intensity;
   varying vec2 vUv;
   varying vec2 vUvPattern;
 
   float pattern() {
-    float s = sin(angle);
-    float c = cos(angle);
+    float s = sin(time / 500.0);
+    float c = cos(time / 500.0);
     vec2 point = vec2(c * vUvPattern.x - s * vUvPattern.y, s * vUvPattern.x + c * vUvPattern.y) * scale;
     return (sin(point.x) * sin(point.y)) * 4.0;
   }
@@ -40,7 +39,7 @@ const fragmentShader = `
   void main() {
     vec4 texel = texture2D(texture, vUv);
     vec3 color = texel.rgb;
-    // color = vec3((color.r + color.g + color.b) / 3.0);
+    color = vec3((color.r + color.g + color.b) / 3.0);
     color = vec3(color * 10.0 - 5.0 + pattern());
     color = texel.rgb + (color - texel.rgb) * intensity;
     gl_FragColor = vec4(color, texel.a);
