@@ -24,7 +24,7 @@ class App extends Component {
         this.refs.video.onloadedmetadata = (e) => {
           this.refs.video.play()
         }
-        this.refs.video.crossOrigin = '';
+        this.refs.video.crossOrigin = ''
         this.refs.video.src = videoSrc
         // Create a playground by passing it the reference to the canvas
         // along with a looping video (which we'll use from 03 onwards)
