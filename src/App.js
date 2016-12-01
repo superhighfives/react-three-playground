@@ -12,7 +12,7 @@ class App extends Component {
     super()
     // Bind `this` to the animate and webcam functions
     this.animate = this.animate.bind(this)
-    this.state = {overlay: false, webcam: queryString.parse(location.search).webcam === "true"}
+    this.state = {overlay: false, webcam: queryString.parse(window.location.search).webcam === 'true'}
   }
   componentDidMount () {
     this.getVideo()
@@ -32,7 +32,7 @@ class App extends Component {
   }
   getVideo () {
     return new Promise((resolve, reject) => {
-      if(this.state.webcam) {
+      if (this.state.webcam) {
         window.navigator.getUserMedia = (window.navigator.getUserMedia || window.navigator.webkitGetUserMedia || window.navigator.mozGetUserMedia || window.navigator.msGetUserMedia)
         window.navigator.getUserMedia({video: true}, (localMediaStream) => {
           resolve(window.URL.createObjectURL(localMediaStream))
