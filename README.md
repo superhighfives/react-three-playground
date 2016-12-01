@@ -22,7 +22,7 @@ Though each playground showcases a different feature, shaders can be interchange
 - [Playground 03](#playground-03) - Video And Texture
 - [Playground 04](#playground-04) - Single Shader
 - [Playground 05](#playground-05) - Multi-Pass Shader
-- [Texture]()
+
 ---
 
 ### Playground 01
