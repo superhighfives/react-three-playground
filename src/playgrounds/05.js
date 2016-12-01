@@ -3,8 +3,8 @@ import { WebGLRenderer, OrthographicCamera, Scene,
          PlaneGeometry, Mesh,
          ShaderMaterial, Texture, LinearFilter,
          Vector2 } from 'three'
-import * as BaseShader from '../shaders/greyscale'
-import * as SecondaryShader from '../shaders/glitch'
+import * as BaseShader from '../shaders/dots'
+import * as SecondaryShader from '../shaders/tv'
 import extend from 'extend'
 
 class Playground {

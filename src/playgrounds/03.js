@@ -1,10 +1,10 @@
-import { WebGLRenderer, PerspectiveCamera, Scene, SpotLight, SpotLightHelper,
+import { WebGLRenderer, PerspectiveCamera, Scene, SpotLight,
          BoxGeometry, MeshPhongMaterial, Mesh,
          ShaderMaterial, Texture, LinearFilter,
          PCFSoftShadowMap,
          Vector2 } from 'three'
 import TrackballControls from 'three-trackballcontrols'
-import { vertexShader, fragmentShader, uniforms } from '../shaders/mirror'
+import { vertexShader, fragmentShader, uniforms } from '../shaders/gradient'
 import extend from 'extend'
 
 class Playground {
@@ -50,21 +50,17 @@ class Playground {
     this.spotlightOrbit = 2 * Math.PI / 180
     this.spotlightRadius = 100
 
-    // This helper visualises the light
-    this.spotLightHelper = new SpotLightHelper(this.spotlight)
-    this.scene.add(this.spotLightHelper)
-
     // Grab a video, make it a texture
     this.videoTexture = new Texture(video)
     this.videoTexture.minFilter = LinearFilter
     this.videoTexture.magFilter = LinearFilter
 
     // And something to cast shadows onto
-    this.planeWidth = 900
-    this.planeHeight = 500
+    this.planeWidth = 1200
+    this.planeHeight = 900
     this.uniforms = extend(uniforms, {
       texture: {type: 't', value: this.videoTexture},
-      textureFactor: {type: 'v2', value: new Vector2(0, 0) },
+      textureFactor: {type: 'v2', value: new Vector2(0, 0)},
       resolution: {type: 'v2', value: new Vector2(window.innerWidth, window.innerHeight)},
       time: {type: 'f', value: 0.0}
     })
@@ -126,9 +122,6 @@ class Playground {
       this.videoTexture.needsUpdate = true
       if (this.uniforms.textureFactor.value.x === 0) this.calculateAspectRatio()
     }
-
-    // Updates the spotlight helper
-    this.spotLightHelper.update()
 
     // Updates the trackball controls
     this.controls.update()
