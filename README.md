@@ -85,6 +85,8 @@ A cube that accepts light and casts shadows.
 ```
 // App.js
 import Playground from './playgrounds/03'
+
+// 03.js
 import { vertexShader, fragmentShader, uniforms } from '../shaders/gradient' // Update for different shaders
 ```
 
@@ -103,6 +105,8 @@ A shaded texture on a box geometry, floating in space, with a cube that accepts 
 ```
 // App.js
 import Playground from './playgrounds/04'
+
+// 04.js
 import { vertexShader, fragmentShader, uniforms } from '../shaders/gradient' // Update for different shaders
 ```
 
@@ -120,6 +124,8 @@ A flat display, with a single shader on a video texture.
 ```
 // App.js
 import Playground from './playgrounds/05'
+
+// 05.js
 import * as BaseShader from '../shaders/dots' // First shader
 import * as SecondaryShader from '../shaders/greyscale' // Second shader
 ```
@@ -137,7 +143,9 @@ A flat display, with a two shaders on a video texture.
 
 ```
 // App.js
-import Playground from './playgrounds/05'
+import Playground from './playgrounds/06'
+
+// 06.js
 import * as DotsShader from '../shaders/dots'
 import * as MirrorShader from '../shaders/mirror'
 import ShaderManager from '../tools/ShaderManager'
