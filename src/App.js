@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Stats from 'stats.js'
-import Playground from './playgrounds/01'
+import Playground from './playgrounds/05'
 import queryString from 'query-string'
 import './index.css'
 
@@ -63,7 +63,7 @@ class App extends Component {
         <canvas ref='canvas' />
         {this.state.overlay &&
           <div className='overlay'>
-            <h1 className='text' style={{display: 'block'}}>You are doing a great job</h1>
+            <h1 className='text' style={{display: 'block'}}>tinyurl.com/r3playground</h1>
           </div>
         }
       </div>

@@ -3,8 +3,8 @@ import { WebGLRenderer, OrthographicCamera, Scene,
          PlaneGeometry, Mesh,
          ShaderMaterial, Texture, LinearFilter,
          Vector2 } from 'three'
-import * as BaseShader from '../shaders/dots'
-import * as SecondaryShader from '../shaders/greyscale'
+import * as BaseShader from '../shaders/texture'
+import * as SecondaryShader from '../shaders/tv'
 import extend from 'extend'
 
 class Playground {
@@ -127,8 +127,8 @@ class Playground {
 
     // Update video texture
     if (this.video.readyState === this.video.HAVE_ENOUGH_DATA) {
-      if(this.videoTexture) this.videoTexture.needsUpdate = true
-      if(this.bufferTexture && this.bufferTexture) this.bufferTexture.needsUpdate = true
+      if (this.videoTexture) this.videoTexture.needsUpdate = true
+      if (this.bufferTexture && this.bufferTexture) this.bufferTexture.needsUpdate = true
     }
 
     // Renders the scene
