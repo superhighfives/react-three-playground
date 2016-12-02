@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
-import { WebGLRenderer } from 'three'
 import Stats from 'stats.js'
-import Playground from './playgrounds/05'
+import Playground from './playgrounds/02'
 import queryString from 'query-string'
 import './index.css'
 
@@ -19,16 +18,14 @@ class App extends Component {
       webcam: queryString.parse(window.location.search).webcam === 'true'
     }
     if (module.hot) {
-      // If hot reloading, stop events and dispose of the renderer
+      // If hot reloading, stop events
       module.hot.dispose(() => {
         this.stopped = true
-        if (this.renderer) this.renderer = null
       })
     }
   }
   componentDidMount () {
-    this.renderer = new WebGLRenderer({canvas: this.refs.canvas, antialias: true})
-
+    this.refs.app.appendChild(this.props.renderer.domElement)
     this.getVideo()
       .then((videoSrc) => {
         this.refs.video.onloadedmetadata = (e) => {
@@ -38,7 +35,7 @@ class App extends Component {
         this.refs.video.src = videoSrc
         // Create a playground by passing it the reference to the canvas
         // along with a looping video (which we'll use from 03 onwards)
-        this.playground = new Playground(this.renderer, this.refs.video)
+        this.playground = new Playground(this.props.renderer, this.refs.video)
 
         // Start the animation
         window.requestAnimationFrame(this.animate.bind(this))
@@ -68,9 +65,8 @@ class App extends Component {
   }
   render () {
     return (
-      <div className='App'>
+      <div className='App' ref='app'>
         <video ref='video' style={{display: 'none'}} controls loop />
-        <canvas ref='canvas' />
         {this.state.overlay &&
           <div className='overlay'>
             <h1 className='text' style={{display: 'block'}}>tinyurl.com/r3playground</h1>
@@ -79,6 +75,10 @@ class App extends Component {
       </div>
     )
   }
+}
+
+App.propTypes = {
+  renderer: React.PropTypes.object
 }
 
 export default App

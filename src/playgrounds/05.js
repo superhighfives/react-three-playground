@@ -3,8 +3,8 @@ import { OrthographicCamera, Scene,
          PlaneGeometry, Mesh,
          ShaderMaterial, Texture, LinearFilter,
          Vector2 } from 'three'
-import * as BaseShader from '../shaders/tv'
-import * as SecondaryShader from '../shaders/dots'
+import * as BaseShader from '../shaders/texture'
+import * as SecondaryShader from '../shaders/flip'
 import extend from 'extend'
 
 class Playground {
