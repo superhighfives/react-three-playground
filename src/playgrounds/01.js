@@ -1,11 +1,11 @@
-import { WebGLRenderer, PerspectiveCamera, Scene,
+import { PerspectiveCamera, Scene,
          BoxGeometry, MeshBasicMaterial, Mesh } from 'three'
 import TrackballControls from 'three-trackballcontrols'
 
 class Playground {
-  constructor (canvas) {
-    // Make a renderer
-    this.renderer = new WebGLRenderer({canvas: canvas, antialias: true})
+  constructor (renderer) {
+    // Update the renderer
+    this.renderer = renderer
     this.renderer.setClearColor(0x00E8D5, 1)
     this.renderer.setSize(window.innerWidth, window.innerHeight)
 

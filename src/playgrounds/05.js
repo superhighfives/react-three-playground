@@ -1,19 +1,18 @@
-import { WebGLRenderer, OrthographicCamera, Scene,
+import { OrthographicCamera, Scene,
          WebGLRenderTarget,
          PlaneGeometry, Mesh,
          ShaderMaterial, Texture, LinearFilter,
          Vector2 } from 'three'
-import * as BaseShader from '../shaders/texture'
-import * as SecondaryShader from '../shaders/tv'
+import * as BaseShader from '../shaders/tv'
+import * as SecondaryShader from '../shaders/dots'
 import extend from 'extend'
 
 class Playground {
-  constructor (canvas, video) {
-    this.canvas = canvas
+  constructor (renderer, video) {
+    this.renderer = renderer
     this.video = video
 
-    // Make a renderer
-    this.renderer = new WebGLRenderer({canvas: this.canvas, antialias: true})
+    // Update the renderer
     this.renderer.setClearColor(0x000000, 1)
     this.renderer.setSize(window.innerWidth, window.innerHeight)
 
@@ -121,6 +120,9 @@ class Playground {
     this.renderer.setSize(window.innerWidth, window.innerHeight)
   }
   loop () {
+    if (BaseShader.render) BaseShader.render()
+    if (SecondaryShader.render) BaseShader.render()
+
     // Update time uniform
     this.uniforms.time.value += 0.1
     this.bufferUniforms.time.value += 0.1

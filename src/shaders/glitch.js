@@ -114,8 +114,6 @@ const render = () => {
 	uniforms.seedX.value = window.Math.sin(counter) * Math.randFloat(-0.3, 0.3)
 	uniforms.seedY.value = window.Math.sin(counter) * Math.randFloat(-0.3, 0.3)
   counter += 0.1
-  window.requestAnimationFrame(render)
 }
-render()
 
-export { vertexShader, fragmentShader, uniforms }
+export { vertexShader, fragmentShader, uniforms, render }

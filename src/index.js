@@ -6,9 +6,9 @@ import './index.css'
 const rootEl = document.getElementById('root')
 ReactDOM.render(<App />, rootEl)
 
-// if (module.hot) {
-//   module.hot.accept('./App', () => {
-//     const NextApp = require('./App').default
-//     ReactDOM.render(<NextApp />, rootEl)
-//   })
-// }
+if (module.hot) {
+  module.hot.accept('./App', () => {
+    const NextApp = require('./App').default
+    ReactDOM.render(<NextApp />, rootEl)
+  })
+}

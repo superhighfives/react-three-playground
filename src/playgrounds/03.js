@@ -1,19 +1,18 @@
-import { WebGLRenderer, PerspectiveCamera, Scene, SpotLight,
+import { PerspectiveCamera, Scene, SpotLight,
          BoxGeometry, MeshPhongMaterial, Mesh,
          ShaderMaterial, Texture, LinearFilter,
          PCFSoftShadowMap,
          Vector2 } from 'three'
 import TrackballControls from 'three-trackballcontrols'
-import { vertexShader, fragmentShader, uniforms } from '../shaders/gradient'
+import { vertexShader, fragmentShader, uniforms, render } from '../shaders/gradient'
 import extend from 'extend'
 
 class Playground {
-  constructor (canvas, video) {
-    this.canvas = canvas
+  constructor (renderer, video) {
+    this.renderer = renderer
     this.video = video
 
-    // Make a renderer
-    this.renderer = new WebGLRenderer({canvas: this.canvas, antialias: true})
+    // Update the renderer
     this.renderer.setClearColor(0xFF5CA6, 1)
     this.renderer.setSize(window.innerWidth, window.innerHeight)
     this.renderer.shadowMap.type = PCFSoftShadowMap
@@ -104,6 +103,8 @@ class Playground {
     // this.uniforms.textureX.value = 1
   }
   loop () {
+    if (render) render()
+
     // Update time uniform
     this.uniforms.time.value += 0.1
 
