@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Stats from 'stats.js'
-import Playground from './playgrounds/02'
+import Playground from './playgrounds/05'
 import queryString from 'query-string'
 import './index.css'
 

@@ -3,8 +3,8 @@ import { OrthographicCamera, Scene,
          PlaneGeometry, Mesh,
          ShaderMaterial, Texture, LinearFilter,
          Vector2 } from 'three'
-import * as BaseShader from '../shaders/texture'
-import * as SecondaryShader from '../shaders/flip'
+import * as BaseShader from '../shaders/dots'
+import * as SecondaryShader from '../shaders/glitch'
 import extend from 'extend'
 
 class Playground {
@@ -121,7 +121,7 @@ class Playground {
   }
   loop () {
     if (BaseShader.render) BaseShader.render()
-    if (SecondaryShader.render) BaseShader.render()
+    if (SecondaryShader.render) SecondaryShader.render()
 
     // Update time uniform
     this.uniforms.time.value += 0.1

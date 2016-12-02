@@ -4,7 +4,7 @@ import { PerspectiveCamera, Scene, SpotLight,
          PCFSoftShadowMap,
          Vector2 } from 'three'
 import TrackballControls from 'three-trackballcontrols'
-import { vertexShader, fragmentShader, uniforms, render } from '../shaders/gradient'
+import { vertexShader, fragmentShader, uniforms, render } from '../shaders/glitch'
 import extend from 'extend'
 
 class Playground {
