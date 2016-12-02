@@ -43,8 +43,8 @@ const uniforms = {
   time: {type: "f", value: 0.0},
   distortion: {type: "f", value: 9.0},
   distortion2: {type: "f", value: 6.0},
-  speed: {type: "f", value: 0.1},
-  rollSpeed: {type: "f", value: 0.01},
+  speed: {type: "f", value: 0.2},
+  rollSpeed: {type: "f", value: 0.1},
   textureFactor: {type: "v2", value: new Vector2(1, 1)}
 }
 

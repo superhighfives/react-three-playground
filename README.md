@@ -42,7 +42,8 @@ Though each playground showcases a different feature, shaders can be interchange
 - [Playground 02](#playground-02) - Light And Shadow
 - [Playground 03](#playground-03) - Video And Texture
 - [Playground 04](#playground-04) - Single Shader
-- [Playground 05](#playground-05) - Multi-Pass Shader
+- [Playground 05](#playground-05) - Dual-Pass Shader
+- [Playground 06](#playground-06) - Multi-Pass Shader
 - [Shaders](#shaders)
 
 ---
@@ -114,7 +115,7 @@ A flat display, with a single shader on a video texture.
 
 ## Playground 05
 ![An example of playground 05](./docs/assets/05.png)
-### Multi-Pass Shader
+### Dual-Pass Shader
 
 ```
 // App.js
@@ -130,9 +131,38 @@ A flat display, with a two shaders on a video texture.
 
 ---
 
+## Playground 06
+![An example of playground 06](./docs/assets/06.png)
+### Multi-Pass Shader
+
+```
+// App.js
+import Playground from './playgrounds/05'
+import * as DotsShader from '../shaders/dots'
+import * as MirrorShader from '../shaders/mirror'
+import ShaderManager from '../tools/ShaderManager'
+
+this.shaderManager = new ShaderManager(this.texture) // Constuct with your base texture
+this.shaderManager.add(DotsShader) // Add shaders
+this.shaderManager.add(MirrorShader) // Add shaders
+
+// Add to render()
+this.shaderManager.render()
+
+// Use the texture and celebrate your success
+const uniforms = { texture: {type: 't', value: this.shaderManager.texture()} }
+```
+
+A flat display, with as many shaders as you like, on a video texture.
+
+- Accepts multiple shaders via a framebuffer using ShaderManager
+- Orthonographic Camera
+
+---
+
 ## Shaders
 
-Playground 03 - 05 accept a shader. The following shaders are currently available:
+Playground 03 - 06 accept a shader. The following shaders are currently available:
 
 - `shaders/base.js` Base (single colour)
 - `shaders/dots.js` Dots

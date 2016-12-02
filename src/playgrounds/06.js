@@ -1,10 +1,12 @@
 import { OrthographicCamera, Scene,
-         WebGLRenderTarget,
          PlaneGeometry, Mesh,
          ShaderMaterial, Texture, LinearFilter,
          Vector2 } from 'three'
-import * as BaseShader from '../shaders/greyscale'
-import * as SecondaryShader from '../shaders/dots'
+import ShaderManager from '../tools/ShaderManager'
+import * as TextureShader from '../shaders/texture'
+import * as GreyscaleShader from '../shaders/mirror'
+import * as DotsShader from '../shaders/dots'
+import * as TVShader from '../shaders/tv'
 import extend from 'extend'
 
 class Playground {
@@ -30,45 +32,23 @@ class Playground {
     this.videoTexture.minFilter = LinearFilter
     this.videoTexture.magFilter = LinearFilter
 
-    // Setup render-to-texture scene
-    this.bufferTexture = new WebGLRenderTarget(window.innerWidth, window.innerHeight, {
-      minFilter: LinearFilter,
-      stencilBuffer: false,
-      depthBuffer: false
-    })
-
-    this.bufferScene = new Scene()
-    this.bufferCamera = new OrthographicCamera(this.sizes.left, this.sizes.right, this.sizes.top, this.sizes.bottom, 0, 10)
-    this.bufferCamera.position.z = 1
-    this.bufferScene.add(this.bufferCamera)
-
-    const bufferSize = this.getGeometrySize()
-    const bufferGeometry = new PlaneGeometry(bufferSize, bufferSize, 1, 1)
-    this.bufferUniforms = extend(SecondaryShader.uniforms, {
-      texture: {type: 't', value: this.videoTexture},
-      resolution: {type: 'v2', value: new Vector2(window.innerWidth, window.innerHeight)},
-      time: {type: 'f', value: 0.0}
-    })
-    this.bufferMaterial = new ShaderMaterial({
-      vertexShader: SecondaryShader.vertexShader,
-      fragmentShader: SecondaryShader.fragmentShader,
-      uniforms: this.bufferUniforms
-    })
-    this.bufferMesh = new Mesh(bufferGeometry, this.bufferMaterial)
-    this.bufferScene.add(this.bufferMesh)
+    this.shaderManager = new ShaderManager(this.videoTexture)
+    this.shaderManager.add(GreyscaleShader)
+    this.shaderManager.add(DotsShader)
+    this.shaderManager.add(TVShader)
 
     // Use rendered scene as a material
     // And something to cast shadows onto
     const planeSize = this.getGeometrySize()
     const planeGeometry = new PlaneGeometry(planeSize, planeSize, 1, 1)
-    this.uniforms = extend(BaseShader.uniforms, {
-      texture: {type: 't', value: this.bufferTexture.texture},
+    this.uniforms = extend(TextureShader.uniforms, {
+      texture: {type: 't', value: this.shaderManager.texture()},
       resolution: {type: 'v2', value: new Vector2(window.innerWidth, window.innerHeight)},
       time: {type: 'f', value: 0.0}
     })
     this.planeMaterial = new ShaderMaterial({
-      vertexShader: BaseShader.vertexShader,
-      fragmentShader: BaseShader.fragmentShader,
+      vertexShader: TextureShader.vertexShader,
+      fragmentShader: TextureShader.fragmentShader,
       uniforms: this.uniforms
     })
     this.plane = new Mesh(planeGeometry, this.planeMaterial)
@@ -120,21 +100,16 @@ class Playground {
     this.renderer.setSize(window.innerWidth, window.innerHeight)
   }
   loop () {
-    if (BaseShader.render) BaseShader.render()
-    if (SecondaryShader.render) SecondaryShader.render()
-
     // Update time uniform
     this.uniforms.time.value += 0.1
-    this.bufferUniforms.time.value += 0.1
 
     // Update video texture
     if (this.video.readyState === this.video.HAVE_ENOUGH_DATA) {
       if (this.videoTexture) this.videoTexture.needsUpdate = true
-      if (this.bufferTexture && this.bufferTexture) this.bufferTexture.needsUpdate = true
     }
 
     // Renders the scene
-    this.renderer.render(this.bufferScene, this.bufferCamera, this.bufferTexture, true)
+    this.shaderManager.render(this.renderer)
     this.renderer.render(this.scene, this.camera)
   }
 }

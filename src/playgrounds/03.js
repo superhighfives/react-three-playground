@@ -4,7 +4,7 @@ import { PerspectiveCamera, Scene, SpotLight,
          PCFSoftShadowMap,
          Vector2 } from 'three'
 import TrackballControls from 'three-trackballcontrols'
-import { vertexShader, fragmentShader, uniforms, render } from '../shaders/glitch'
+import { vertexShader, fragmentShader, uniforms, render } from '../shaders/tv'
 import extend from 'extend'
 
 class Playground {
@@ -61,7 +61,8 @@ class Playground {
       texture: {type: 't', value: this.videoTexture},
       textureFactor: {type: 'v2', value: new Vector2(0, 0)},
       resolution: {type: 'v2', value: new Vector2(window.innerWidth, window.innerHeight)},
-      time: {type: 'f', value: 0.0}
+      time: {type: 'f', value: 0.0},
+      volume: {type: 'f', value: 0.0}
     })
     const planeGeometry = new BoxGeometry(this.planeWidth, this.planeHeight, 5)
     const planeMaterial = new ShaderMaterial({
