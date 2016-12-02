@@ -73,7 +73,7 @@ class App extends Component {
         <canvas ref='canvas' />
         {this.state.overlay &&
           <div className='overlay'>
-            <h1 className='text' style={{display: 'block'}}>So, there was a bug with hot reloading in React. If you find stuff slowing down as you play with it, just git pull. SOZ!<br /><br />tinyurl.com/r3playground</h1>
+            <h1 className='text' style={{display: 'block'}}>tinyurl.com/r3playground</h1>
           </div>
         }
       </div>
