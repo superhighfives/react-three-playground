@@ -1,10 +1,10 @@
 import { PerspectiveCamera, Scene, SpotLight,
          BoxGeometry, MeshPhongMaterial, Mesh,
          ShaderMaterial, Texture, LinearFilter,
-         PCFSoftShadowMap,
+         PCFSoftShadowMap, ShaderChunk, SpotLightHelper,
          Vector2 } from 'three'
 import TrackballControls from 'three-trackballcontrols'
-import { vertexShader, fragmentShader, uniforms, render } from '../shaders/tv'
+import * as LightingShader from '../shaders/lighting'
 import extend from 'extend'
 
 class Playground {
@@ -20,7 +20,8 @@ class Playground {
 
     // Make a camera and position it off center
     this.camera = new PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 10000)
-    this.camera.position.z = 500
+    this.camera.position.z = 1000
+    this.camera.position.x = -500
 
     // Make a scene, add the camera to it
     this.scene = new Scene()
@@ -49,28 +50,40 @@ class Playground {
     this.spotlightOrbit = 2 * Math.PI / 180
     this.spotlightRadius = 100
 
+    // This helper visualises the light
+    this.spotLightHelper = new SpotLightHelper(this.spotlight)
+    this.scene.add(this.spotLightHelper)
+
     // Grab a video, make it a texture
     this.videoTexture = new Texture(video)
     this.videoTexture.minFilter = LinearFilter
     this.videoTexture.magFilter = LinearFilter
 
+    // Use rendered scene as a material
     // And something to cast shadows onto
     this.planeWidth = 1200
     this.planeHeight = 900
-    this.uniforms = extend(uniforms, {
+    const planeGeometry = new BoxGeometry(this.planeWidth, this.planeHeight, 5)
+
+    this.uniforms = extend(LightingShader.uniforms, {
       texture: {type: 't', value: this.videoTexture},
       textureFactor: {type: 'v2', value: new Vector2(0, 0)},
       resolution: {type: 'v2', value: new Vector2(window.innerWidth, window.innerHeight)},
+      lightPosition: {type: 'v3', value: this.spotlight.position},
       time: {type: 'f', value: 0.0}
     })
-    const planeGeometry = new BoxGeometry(this.planeWidth, this.planeHeight, 5)
-    const planeMaterial = new ShaderMaterial({
-      vertexShader: vertexShader,
-      fragmentShader: fragmentShader,
-      uniforms: this.uniforms
+
+    this.planeMaterial = new ShaderMaterial({
+      vertexShader: this.shaderParse(LightingShader.vertexShader),
+      fragmentShader: this.shaderParse(LightingShader.fragmentShader),
+      uniforms: this.uniforms,
+      lights: true,
+      transparent: true
     })
-    this.plane = new Mesh(planeGeometry, planeMaterial)
+
+    this.plane = new Mesh(planeGeometry, this.planeMaterial)
     this.plane.position.z = -100
+    this.plane.castShadow = true
     this.plane.receiveShadow = true
     this.scene.add(this.plane)
 
@@ -97,11 +110,16 @@ class Playground {
       this.uniforms.textureFactor.value.y = planeAspect / textureAspect
     }
   }
+  replaceThreeChunkFn (a, b) {
+    return ShaderChunk[b] + '\n'
+  }
+  shaderParse (glsl) {
+    return glsl.replace(/\/\/\s?chunk\(\s?(\w+)\s?\);/g, this.replaceThreeChunkFn)
+  }
   loop () {
-    if (render) render()
-
     // Update time uniform
     this.uniforms.time.value += 0.1
+    this.uniforms.lightPosition.value = this.spotlight.position
 
     // Rotate the cube
     this.cube.rotation.x += 0.001
@@ -121,6 +139,9 @@ class Playground {
 
     // Updates the trackball controls
     this.controls.update()
+
+    // Updates the spotlight
+    this.spotLightHelper.update()
 
     // Renders the scene
     this.renderer.render(this.scene, this.camera)
