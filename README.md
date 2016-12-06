@@ -44,6 +44,7 @@ Though each playground showcases a different feature, shaders can be interchange
 - [Playground 04](#playground-04) - Single Shader
 - [Playground 05](#playground-05) - Dual-Pass Shader
 - [Playground 06](#playground-06) - Multi-Pass Shader
+- [Playground 07](#playground-07) - Shadows And Shaders
 - [Shaders](#shaders)
 
 ---
@@ -168,9 +169,27 @@ A flat display, with as many shaders as you like, on a video texture.
 
 ---
 
+## Playground 07
+![An example of playground 07](./docs/assets/07.png)
+### Shadows And Shaders
+
+```
+// App.js
+import Playground from './playgrounds/07'
+
+// 04.js
+import * as LightingShader from '../shaders/lighting'
+```
+
+A shaded texture that receives shadow on a box geometry, floating in space, with a cube that accepts light.
+
+- Orthonographic camera
+
+---
+
 ## Shaders
 
-Playground 03 - 06 accept a shader. The following shaders are currently available:
+Playground 03 - 07 accept a shader. The following shaders are currently available:
 
 - `shaders/base.js` Base (single colour)
 - `shaders/dots.js` Dots
