@@ -1,11 +1,9 @@
 import React, { Component } from 'react'
-import Stats from 'stats.js'
-import Playground from './playgrounds/01'
+import Playground from './playgrounds/09'
 import queryString from 'query-string'
 import './index.css'
 
-const stats = new Stats()
-document.body.appendChild(stats.dom)
+
 
 class App extends Component {
   constructor () {
@@ -56,9 +54,9 @@ class App extends Component {
   }
   animate () {
     // Measure the stats and loop the playground
-    stats.begin()
+    this.props.stats.begin()
     this.playground.loop()
-    stats.end()
+    this.props.stats.end()
 
     // Keep looping the animation
     if (!this.stopped) window.requestAnimationFrame(this.animate)
@@ -78,7 +76,8 @@ class App extends Component {
 }
 
 App.propTypes = {
-  renderer: React.PropTypes.object
+  renderer: React.PropTypes.object,
+  stats: React.PropTypes.object
 }
 
 export default App
