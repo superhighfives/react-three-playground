@@ -27,6 +27,7 @@ const uniforms = {
 	distortionX: {value: 0.5},
 	distortionY: {value: 0.6},
 	colS: {value: 0.05},
+  texture: { type: 't', value: null },
   textureFactor: {type: 'v2', value: new Vector2(1, 1)}
 }
 

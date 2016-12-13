@@ -3,6 +3,7 @@ import { UniformsUtils, UniformsLib } from 'three'
 /* eslint-disable */
 const uniforms = UniformsUtils.merge([
   UniformsLib['lights'], {
+    texture: { type: 't', value: null },
     opacity: {value: 1.0}
   }
 ])

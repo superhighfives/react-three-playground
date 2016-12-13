@@ -8,6 +8,7 @@
     "react-scripts": "0.7.0",
     "stats.js": "^0.17.0",
     "three": "^0.82.1",
+    "three-effectcomposer-es6": "superhighfives/three-effectcomposer-es6",
     "three-trackballcontrols": "0.0.5"
   },
   "dependencies": {

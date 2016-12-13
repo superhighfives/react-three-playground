@@ -4,7 +4,7 @@ import { OrthographicCamera, Scene,
          Vector2 } from 'three'
 import ShaderManager from '../tools/ShaderManager'
 import * as TextureShader from '../shaders/texture'
-import * as GreyscaleShader from '../shaders/mirror'
+import * as GreyscaleShader from '../shaders/greyscale'
 import * as DotsShader from '../shaders/dots'
 import * as TVShader from '../shaders/tv'
 import extend from 'extend'

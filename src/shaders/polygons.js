@@ -1,21 +1,18 @@
 /* eslint-disable */
 import { Vector2, Vector4, UniformsLib, UniformsUtils,
-         ShaderChunk } from 'three'
+         ShaderChunk, Color } from 'three'
 
 const uniforms = UniformsUtils.merge([
   UniformsLib['lights'], {
     time: {type: 'f', value: 0.0 },
+    color: {type: 'c', value: new Color(0xffffff)}
   }
 ])
 
 const vertexShader = `
   uniform float time;
 
-  varying vec3 vViewPosition;
   varying vec3 vPosition;
-
-  ${ShaderChunk["common"]}
-  ${ShaderChunk["shadowmap_pars_vertex"]}
 
   void main() {
     // Adding some displacement based on the vertex position
@@ -30,18 +27,14 @@ const vertexShader = `
     vec4 worldPosition = modelMatrix * vec4(pos, 1.0);
 
     vec4 mvPosition = modelViewMatrix * vec4(pos, 1.0);
-    vViewPosition = - mvPosition.xyz; // vector from vertex to camera
     vPosition = mvPosition.xyz;
 
     gl_Position = projectionMatrix * viewMatrix * worldPosition;
-
-    ${ShaderChunk["shadowmap_vertex"]}
   }
 `
 
 const fragmentShader = `
   uniform vec3 color;
-  varying vec3 vViewPosition;
   varying vec3 vPosition;
 
   ${ShaderChunk["common"]}
@@ -54,7 +47,7 @@ const fragmentShader = `
 
   void main() {
     vec3 outgoingLight = color.rgb;
-    vec3 normal = normalize( cross( dFdx( vViewPosition ), dFdy( vViewPosition ) ) );
+    vec3 normal = normalize( cross( dFdx( -vPosition ), dFdy( -vPosition ) ) );
     vec4 addedLights = vec4(0., 0., 0., 1.);
     #if NUM_POINT_LIGHTS > 0
       for(int l = 0; l < NUM_POINT_LIGHTS; l++) {

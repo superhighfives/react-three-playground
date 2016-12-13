@@ -3,8 +3,6 @@ import Playground from './playgrounds/09'
 import queryString from 'query-string'
 import './index.css'
 
-
-
 class App extends Component {
   constructor () {
     super()

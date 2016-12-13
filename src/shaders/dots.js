@@ -5,6 +5,7 @@ const uniforms = {
   scale: {type: 'f', value: 1000.0},
   intensity: {type: 'f', value: 1.0 },
   offsetRepeat: {type: 'v4', value: new Vector4(0.5, 0.5, 1.0, 1.0) },
+  texture: { type: 't', value: null },
   textureFactor: {type: 'v2', value: new Vector2(1, 1)}
 }
 

@@ -1,6 +1,7 @@
 import { Vector2 } from 'three'
 
 const uniforms = {
+  texture: { type: 't', value: null },
   textureFactor: {type: 'v2', value: new Vector2(1, 1)}
 }
 
