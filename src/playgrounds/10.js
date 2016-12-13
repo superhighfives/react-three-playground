@@ -5,8 +5,8 @@ import { PerspectiveCamera, Scene, PointLight,
 import TrackballControls from 'three-trackballcontrols'
 import { vertexShader, fragmentShader, uniforms } from '../shaders/polygons'
 import EffectComposer, { RenderPass, ShaderPass, CopyShader } from 'three-effectcomposer-es6'
-import * as TVShader from '../shaders/tv'
-import * as GreyscaleShader from '../shaders/greyscale'
+import * as TVShader from '../shaders/dots'
+import * as GreyscaleShader from '../shaders/mirror'
 import extend from 'extend'
 
 class Playground {
@@ -92,7 +92,7 @@ class Playground {
   loop () {
     // Update time uniform
     this.uniforms.time.value += 0.1
-    this.tvPass.uniforms.time.value += 0.01
+    // this.tvPass.uniforms.time.value += 0.01
 
     this.plane.rotation.x += 0.01
 
