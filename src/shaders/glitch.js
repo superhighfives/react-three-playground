@@ -1,6 +1,16 @@
 /* eslint-disable */
 import { Vector2, DataTexture, RGBFormat, FloatType, Math } from 'three'
 
+/**
+ * To render:
+ * uniforms.amount.value = window.Math.sin(counter) * window.Math.random() / 90.0
+ * uniforms.angle.value = Math.randFloat(-window.Math.PI, window.Math.PI)
+ * uniforms.distortionX.value = window.Math.sin(counter) * Math.randFloat(0.0, 1.0)
+ * uniforms.distortionY.value = window.Math.sin(counter) * Math.randFloat(0.0, 1.0)
+ * uniforms.seedX.value = window.Math.sin(counter) * Math.randFloat(-0.3, 0.3)
+ * uniforms.seedY.value = window.Math.sin(counter) * Math.randFloat(-0.3, 0.3)
+ */
+
 const generatePerturbMap = () => {
   let i, x
   let l = 64 * 64
@@ -19,7 +29,7 @@ const generatePerturbMap = () => {
 
 const uniforms = {
 	tPerturb: {value: generatePerturbMap()},
-	amount: {value: 0.8},
+	amount: {value: 0.01},
 	angle: {value: 0.02},
 	seed: {value: window.Math.random()},
 	seedX: {value: 0.02},
@@ -106,15 +116,4 @@ const fragmentShader = `
   }
 `
 
-let counter = 0
-const render = () => {
-  uniforms.amount.value = window.Math.sin(counter) * window.Math.random() / 90.0
-	uniforms.angle.value = Math.randFloat(-window.Math.PI, window.Math.PI)
-	uniforms.distortionX.value = window.Math.sin(counter) * Math.randFloat(0.0, 1.0)
-	uniforms.distortionY.value = window.Math.sin(counter) * Math.randFloat(0.0, 1.0)
-	uniforms.seedX.value = window.Math.sin(counter) * Math.randFloat(-0.3, 0.3)
-	uniforms.seedY.value = window.Math.sin(counter) * Math.randFloat(-0.3, 0.3)
-  counter += 0.1
-}
-
-export { vertexShader, fragmentShader, uniforms, render }
+export { vertexShader, fragmentShader, uniforms }
