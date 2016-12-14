@@ -1,7 +1,7 @@
 import { PerspectiveCamera, Scene, PointLight,
          BoxGeometry, Mesh, ShaderMaterial,
          PCFSoftShadowMap, PointLightHelper, Raycaster,
-         LinearFilter, Texture, Vector2, Vector3, Math as TMath } from 'three'
+         LinearFilter, Texture, Vector2, Math as TMath } from 'three'
 import TrackballControls from 'three-trackballcontrols'
 import EffectComposer, { RenderPass, ShaderPass, CopyShader } from 'three-effectcomposer-es6'
 import * as LightingShader from '../shaders/lighting'
