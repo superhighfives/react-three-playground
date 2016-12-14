@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Playground from './playgrounds/10'
+import Playground from './playgrounds/11'
 import queryString from 'query-string'
 import './index.css'
 
@@ -11,7 +11,8 @@ class App extends Component {
     this.state = {
       overlay: queryString.parse(window.location.search).overlay === 'true',
       video: queryString.parse(window.location.search).video || '/videos/video.mp4',
-      webcam: queryString.parse(window.location.search).webcam === 'true'
+      webcam: queryString.parse(window.location.search).webcam === 'true',
+      canvas: queryString.parse(window.location.search).canvas === 'true'
     }
     if (module.hot) {
       // If hot reloading, stop events
@@ -22,7 +23,20 @@ class App extends Component {
   }
   componentDidMount () {
     this.refs.app.appendChild(this.props.renderer.domElement)
-    this.getVideo()
+
+    if (this.state.canvas) {
+      this.getCanvas()
+      .then(() => {
+        // Create a playground by passing it the reference to the canvas
+        // along with the canvas element we want to display
+        this.playground = new Playground(this.props.renderer, this.refs.image)
+
+        // Start the animation
+        window.requestAnimationFrame(this.animate.bind(this))
+      })
+      .catch((e) => { throw new Error(e) })
+    } else {
+      this.getVideo()
       .then((videoSrc) => {
         this.refs.video.onloadedmetadata = (e) => {
           if (this.refs.video) this.refs.video.play()
@@ -37,6 +51,14 @@ class App extends Component {
         window.requestAnimationFrame(this.animate.bind(this))
       })
       .catch((e) => { throw new Error(e) })
+    }
+  }
+  getCanvas () {
+    return new Promise((resolve, reject) => {
+      let canvas = this.refs.image
+      this.ctx = canvas.getContext('2d')
+      resolve()
+    })
   }
   getVideo () {
     return new Promise((resolve, reject) => {
@@ -56,12 +78,21 @@ class App extends Component {
     this.playground.loop()
     this.props.stats.end()
 
+    if (this.refs.image && this.ctx) {
+      this.ctx.beginPath()
+      this.ctx.rect(Math.random() * this.refs.image.width, Math.random() * this.refs.image.height, 50, 50)
+      this.ctx.fillStyle = `rgba(${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.floor(Math.random() * 255)}, ${Math.random()})`
+      this.ctx.fill()
+      this.ctx.closePath()
+    }
+
     // Keep looping the animation
     if (!this.stopped) window.requestAnimationFrame(this.animate)
   }
   render () {
     return (
       <div className='App' ref='app'>
+        <canvas ref='image' width='1000' height='400' style={{display: 'none'}} />
         <video ref='video' style={{display: 'none'}} controls loop />
         {this.state.overlay &&
           <div className='overlay'>
