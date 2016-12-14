@@ -6,6 +6,7 @@ const uniforms = UniformsUtils.merge([
   UniformsLib['lights'], {
     texture: { type: 't', value: null },
     time: {type: 'f', value: 0.0 },
+    influence: {type: 'f', value: 15.0},
     color: {type: 'c', value: new Color(0xffffff)},
     textureFactor: {type: 'v2', value: new Vector2(1, 1)}
   }
@@ -17,15 +18,16 @@ const vertexShader = `
 
   uniform float time;
   uniform vec2 textureFactor;
+  uniform float influence;
 
   void main() {
     vUv = vec2(0.5 + (uv.x - 0.5) / textureFactor.x, 0.5 + (uv.y - 0.5) / textureFactor.y);
 
     // Adding some displacement based on the vertex position
     vec3 offset = vec3(
-      sin(position.x + (time / 5.0)) * 15.0,
-      sin(position.y + (time / 5.0) + 31.512) * 15.0,
-      sin(position.z + (time / 5.0) + 112.512) * 15.0
+      sin(position.x + (time / 5.0)) * influence,
+      sin(position.y + (time / 5.0) + 31.512) * influence,
+      sin(position.z + (time / 5.0) + 112.512) * influence
     );
 
     vec3 pos = position + offset;

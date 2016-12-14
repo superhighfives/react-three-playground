@@ -24,7 +24,8 @@ class Playground {
 
     // Make a camera and position it off center
     this.camera = new PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 10000)
-    this.camera.position.z = 800
+    this.camera.position.z = 1000
+    this.camera.position.x = -1000
 
     // Make a scene, add the camera to it
     this.scene = new Scene()
@@ -62,6 +63,7 @@ class Playground {
       textureFactor: {type: 'v2', value: new Vector2(0, 0)},
       resolution: {type: 'v2', value: new Vector2(window.innerWidth, window.innerHeight)},
       lightPosition: {type: 'v3', value: this.pointlight.position},
+      influence: {type: 'f', value: 100.0},
       time: {type: 'f', value: 0.0}
     })
     const planeGeometry = new BoxGeometry(this.planeWidth, this.planeHeight, 50)
@@ -146,7 +148,7 @@ class Playground {
     if (this.mouseenter) {
       this.raycaster.setFromCamera(this.mouse, this.camera)
       let intersects = this.raycaster.intersectObjects(this.scene.children)
-      if(intersects.length) {
+      if (intersects.length) {
         intersects.forEach((child) => {
           this.partytime = child.object.name === 'plane'
         })
@@ -160,12 +162,12 @@ class Playground {
     // Update time uniform
     this.uniforms.time.value += 0.1
 
-    if(this.partytime) {
-      this.dotsPass.enabled = true
+    if (this.partytime) {
+      this.uniforms.influence.value = 30.0
       this.glitchPass.enabled = true
       this.tvPass.enabled = true
     } else {
-      this.dotsPass.enabled = false
+      this.uniforms.influence.value = 15.0
       this.glitchPass.enabled = false
       this.tvPass.enabled = false
     }
