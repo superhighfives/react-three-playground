@@ -1,13 +1,14 @@
 <a href="https://github.com/superhighfives/react-three-playground">
-  <img alt="react-three-playgournd" src="./docs/assets/r3-logo.png" height="151px" />
+  <img alt="React + Three Playground" src="./docs/assets/r3-logo.png" height="151px" />
 </a>
-<br />
 
-# React + Three Playground
+# React and Three.js playground
 
-R3, or React and Three.js, is a series of playgrounds and demos highlighting many of the features and capabilities of WebGL. It covers simple objects, textures and lighting, all the way to custom shaders, framebuffers and video. It benefits from hot reloading, Webpack, and ES6 support out of the box.
+R3, or React and Three.js, is a series of playgrounds and demos showing off many of the features of WebGL. It covers simple objects, textures, and lighting, all the way up to custom shaders, framebuffers, and video. It comes with hot reloading, Webpack, and ES6 support out of the box.
 
-It is set up to accept a single video, either by passing a video URL via the `video` query string (for example, [http://localhost:3000/?video=https://media.giphy.com/media/3o6Zti8Yz88sqW1nq0/giphy.mp4](http://localhost:3000/?video=https://media.giphy.com/media/3o6Zti8Yz88sqW1nq0/giphy.mp4)) or by using the `webcam` query string (with http://localhost:3000/?webcam=true). If neither are present, the app will fall back to using a video file, in `video/video.mp4`.
+Status: archived. Made in 2016 for a workshop, not maintained. It's built on an early version of Create React App, which has since been deprecated, and on a 2016 version of Three.js, so a lot of the APIs used here have changed. If you want React and Three.js together today, [React Three Fiber](https://github.com/pmndrs/react-three-fiber) is where most people end up.
+
+It is set up to accept a single video, either by passing a video URL via the `video` query string (for example, [http://localhost:3000/?video=https://media.giphy.com/media/3o6Zti8Yz88sqW1nq0/giphy.mp4](http://localhost:3000/?video=https://media.giphy.com/media/3o6Zti8Yz88sqW1nq0/giphy.mp4)) or by using the `webcam` query string (with http://localhost:3000/?webcam=true). If neither is present, the app will fall back to using a video file, in `video/video.mp4`.
 
 You can also see how React could be used in tandem with the Three.js canvas element, which can be activated with the `overlay` query string. [http://localhost:3000/?overlay=true](http://localhost:3000/?overlay=true).
 
@@ -36,16 +37,18 @@ To view different playgrounds, edit the `Playground` import in `App.js`. For exa
 import Playground from './playgrounds/01'
 ```
 
-Though each playground showcases a different feature, shaders can be interchanged simply by changing the Shader variable that is imported. There is no need to change the settings / uniforms passed to the shaders. Unless you want to. In which case, go for it, you!
+Though each playground shows off a different feature, you can swap shaders by changing the shader that's imported. There's no need to change the settings or uniforms passed to the shaders. Unless you want to. In which case, go for it, you!
 
 - [Playground 01](#playground-01) - Geometry
-- [Playground 02](#playground-02) - Light And Shadow
-- [Playground 03](#playground-03) - Video And Texture
-- [Playground 04](#playground-04) - Single Shader
-- [Playground 05](#playground-05) - Dual-Pass Shader
-- [Playground 06](#playground-06) - Multi-Pass Shader
-- [Playground 07](#playground-07) - Shadows And Shaders
+- [Playground 02](#playground-02) - Light and shadow
+- [Playground 03](#playground-03) - Video and texture
+- [Playground 04](#playground-04) - Single shader
+- [Playground 05](#playground-05) - Dual-pass shader
+- [Playground 06](#playground-06) - Multi-pass shader
+- [Playground 07](#playground-07) - Shadows and shaders
 - [Shaders](#shaders)
+
+There are also playgrounds 08 to 11 in `src/playgrounds`, which were added later and aren't documented here. They include an ocean, a polygon shader, and a few multi-pass experiments.
 
 ---
 
@@ -66,7 +69,7 @@ A wireframe box, floating in space.
 
 ## Playground 02
 ![An example of playground 02](./docs/assets/02.png)
-### Light And Shadow
+### Light and shadow
 
 ```
 // App.js
@@ -81,7 +84,7 @@ A cube that accepts light and casts shadows.
 
 ## Playground 03
 ![An example of playground 03](./docs/assets/03.png)
-### Video And Texture
+### Video and texture
 
 ```
 // App.js
@@ -101,7 +104,7 @@ A shaded texture on a box geometry, floating in space, with a cube that accepts 
 
 ## Playground 04
 ![An example of playground 04](./docs/assets/04.png)
-### Single Shader
+### Single shader
 
 ```
 // App.js
@@ -114,13 +117,13 @@ import { vertexShader, fragmentShader, uniforms } from '../shaders/gradient' // 
 A flat display, with a single shader on a video texture.
 
 - Accepts one shader
-- Orthonographic camera
+- Orthographic camera
 
 ---
 
 ## Playground 05
 ![An example of playground 05](./docs/assets/05.png)
-### Dual-Pass Shader
+### Dual-pass shader
 
 ```
 // App.js
@@ -131,16 +134,16 @@ import * as BaseShader from '../shaders/dots' // First shader
 import * as SecondaryShader from '../shaders/greyscale' // Second shader
 ```
 
-A flat display, with a two shaders on a video texture.
+A flat display, with two shaders on a video texture.
 
 - Accepts two shaders via a framebuffer
-- Orthonographic Camera
+- Orthographic camera
 
 ---
 
 ## Playground 06
 ![An example of playground 06](./docs/assets/06.png)
-### Multi-Pass Shader
+### Multi-pass shader
 
 ```
 // App.js
@@ -151,7 +154,7 @@ import * as DotsShader from '../shaders/dots'
 import * as MirrorShader from '../shaders/mirror'
 import ShaderManager from '../tools/ShaderManager'
 
-this.shaderManager = new ShaderManager(this.texture) // Constuct with your base texture
+this.shaderManager = new ShaderManager(this.texture) // Construct with your base texture
 this.shaderManager.add(DotsShader) // Add shaders
 this.shaderManager.add(MirrorShader) // Add shaders
 
@@ -164,53 +167,53 @@ const uniforms = { texture: {type: 't', value: this.shaderManager.texture()} }
 
 A flat display, with as many shaders as you like, on a video texture.
 
-- Accepts multiple shaders via a framebuffer using ShaderManager
-- Orthonographic Camera
+- Accepts multiple shaders via a framebuffer using `ShaderManager`
+- Orthographic camera
 
 ---
 
 ## Playground 07
 ![An example of playground 07](./docs/assets/07.png)
-### Shadows And Shaders
+### Shadows and shaders
 
 ```
 // App.js
 import Playground from './playgrounds/07'
 
-// 04.js
+// 07.js
 import * as LightingShader from '../shaders/lighting'
 ```
 
 A shaded texture that receives shadow on a box geometry, floating in space, with a cube that accepts light.
 
-- Orthonographic camera
+- Perspective camera
 
 ---
 
 ## Shaders
 
-Playground 03 - 07 accept a shader. The following shaders are currently available:
+Playgrounds 03 to 07 accept a shader. The following shaders are available:
 
-- `shaders/base.js` Base (single colour)
+- `shaders/base.js` Base (single color)
 - `shaders/dots.js` Dots
 - `shaders/flip.js` Flip (horizontally)
 - `shaders/glitch.js` Glitch
 - `shaders/gradient.js` Gradient
 - `shaders/greyscale.js` Greyscale
-- `shaders/mirror.js` Mirror (mirror's texture horizontally)
+- `shaders/mirror.js` Mirror (mirrors texture horizontally)
 - `shaders/texture.js` Texture (displays texture)
-- `shaders/tv.js` TV (Old rolling TV)
+- `shaders/tv.js` TV (old rolling TV)
 
 ---
 
 ## Why?
+
 This repo was written for a workshop at Decompress 2016, in Melbourne, Australia.
 
 ## A note on React
-Though this app is built on [Create React App](https://github.com/facebookincubator/create-react-app), it keeps a distinct line between React and Three. This allows for the benefits of React and Webpack without an overcomplicated architecture. There are many projects that support a more tightly integrated relationship between React and Three.js, like [React Three Renderer](https://github.com/toxicFork/react-three-renderer) and [React Three](https://github.com/Izzimach/react-three), and you should definetely check them out.
+
+Though this app is built on [Create React App](https://github.com/facebook/create-react-app), it keeps a distinct line between React and Three. This allows for the benefits of React and Webpack without an overcomplicated architecture. There are many projects that support a more tightly integrated relationship between React and Three.js, like [React Three Renderer](https://github.com/toxicFork/react-three-renderer) and [React Three](https://github.com/Izzimach/react-three). Both have long since stopped being maintained, and [React Three Fiber](https://github.com/pmndrs/react-three-fiber) has taken their place.
 
 ## Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebookincubator/create-react-app).
-
-You can find the most recent documentation for using create-react-app [here](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md).
+This project was bootstrapped with an early version of [Create React App](https://github.com/facebook/create-react-app). It needs an old version of Node to run.
